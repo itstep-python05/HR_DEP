@@ -16,6 +16,10 @@ class DepartmentModel(object):
         return dep_list
 
     @staticmethod
-    def get_depname_by_id() -> str:
+    def get_name_by_id(id: int) -> str:
         #здесь будет сценарий извлечения имени департамента по его id
-        return ''
+        query = 'select name from departments where id=%s'
+        cursor = mysql.get_db().cursor()
+        cursor.execute(query, (id,))
+        row = cursor.fetchone()
+        return row[0]
